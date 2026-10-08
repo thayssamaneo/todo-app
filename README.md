@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Meu Primeiro Projeto NEXT  -  TodoList
 
-## Getting Started
+## Introdução ao Desenvolvimento de uma aplicação To-Do com Next.js e MongoDB
 
-First, run the development server:
+## Objetivos
+Aplicação de Lista de Tarefas completa, integrando o front do Next.js com backend em API Routes e o MongoDB. Consolidando ideais de arquitetura Full-Stack dentro de um mesmo framework
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Criar e configurar um projeto Next.js com Typescript
+- Configurar a conexão com o MongoDB usando Mongoose
+- Criar uma modelagem de dados 
+- implementar rotas de API (Listar, Cadastrar, atualizar e excluir tarefas)
+- Consumir essa rotas a partir do frontEnd
+- Compreender o fluxo do CRUD na aplicação
+
+## Contextualização
+
+A aplicação deve permitir que o usuário:
+- Adicione uma nova tarefa
+- Visualize todas as tarefas cadastradas
+- Marque uma tarefa como concluída ou pendente
+- Remova itens da lista
+- Tenha persistência de dados em banco
+
+## Visão Geral da Arquitetura
+
+```mermaid
+flowchart TB
+    Frontend["FrontEnd<br/>React+Next.js<br/>Componentes e interface"]
+    API["API Routes (Next.js)<br/>/api/todos"]
+    MongoDB["MongoDB<br/>Armazenamento de Tarefas"]
+
+    Frontend -->|HTTP / fetch|API
+    API --> |Solicitação Mongoose| MongoDB
+    MongoDB --> | Devolve a solicitação | API
+    API -->| Response HTTP / fetch | Frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Escopo do Projeto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### FrontEnd (Next.js/React)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+- exibição da lista de tarefas;
+- formulário para adicionar novas tarefas;
+- botão para alternar status (concluída ou pendente);
+- botão para excluir tarefas;
+- atualização dinâmica da interface sem recarregar a página.
 
-To learn more about Next.js, take a look at the following resources:
+### BackEnd (Next.js API Routes)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `GET /api/todos`: retorna todas as tarefas;
+- `POST /api/todos`: cria uma nova tarefa;
+- `PUT /api/todos/[id]`: atualiza uma tarefa existente;
+- `DELETE /api/todos/[id]`: remove uma tarefa.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### Banco De Dados (MongoDB)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- armazenamento das tarefas;
+- persistência do título e do status de conclusão;
+- conexão segura e reutilizável com o banco.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Estrutura do Projeto
+
+```text
+todo-app/
+|-- public/
+|-- scr/
+|   |-- app/
+|   |   |-- pages/
+|   |   |-- componentes/
+|   |   |-- model/
+```
+
+## Dependências
+
+
+npm install mongoose
+> Permite conectar a aplicação ao MongoDB, definir Modelos para os dados e realizar operações do CRUD
+
+npm install -D @types/react @types/node
+> Adiciona definições para o TypeScript dos componentes react e node
